@@ -191,6 +191,7 @@ cd backend
 | Backend | `.venv\Scripts\python.exe -m pytest` | 43 теста | 43 passed |
 | Frontend | `npm.cmd test` | 8 тестов в 3 файлах | 8 passed |
 
+
 ### Команды запуска
 
 ```bash
