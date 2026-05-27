@@ -1,0 +1,11 @@
+case_name,html_size_kb,execution_time_ms,peak_memory_kb,tokens_count,total_tags,max_dom_depth,ingredients_count,steps_count,errors_count,warnings_count,status,error_message
+broken_html.html,0.85,72.34,368.63,42,24,23,7,3,7,5,OK,
+incomplete_recipe.html,0.63,19.61,95.1,32,14,6,3,0,3,4,OK,
+large_recipe.html,10.09,65.1,798.08,378,149,39,40,25,1,1,OK,
+medium_recipe.html,4.3,24.24,307.19,134,53,8,12,9,0,1,OK,
+multiple_recipes.html,2.71,20.61,139.61,74,31,7,4,3,0,2,OK,
+noisy_html.html,3.56,36.76,331.48,173,71,8,6,4,0,1,OK,
+recipe_without_image.html,1.63,30.42,120.69,49,20,6,5,3,1,2,OK,
+recipe_without_ingredients.html,1.39,22.71,89.8,33,15,6,0,3,1,1,OK,
+recipe_without_steps.html,1.19,29.41,100.53,39,17,6,5,0,1,2,OK,
+small_recipe.html,1.64,14.18,107.93,44,19,6,3,3,0,1,OK,

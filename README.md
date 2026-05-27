@@ -181,10 +181,78 @@ Backend:
 
 ```bash
 cd backend
-pytest
+.venv\Scripts\python.exe -m pytest
 ```
 
-С покрытием:
+Фактический результат последнего прогона:
+
+| Часть проекта | Команда | Сколько проверок | Результат |
+| --- | --- | ---: | --- |
+| Backend | `.venv\Scripts\python.exe -m pytest` | 43 теста | 43 passed |
+| Frontend | `npm.cmd test` | 8 тестов в 3 файлах | 8 passed |
+
+## Тестирование производительности
+
+Команды выполняются из активированного backend-окружения. В этом разделе зафиксирован не только запуск команд, но и то, что программа выводит: количество тестов, статусы, результаты ручных API-проверок и таблица benchmark.
+
+### Скриншоты результатов
+
+![Автоматические тесты проходят](docs/screenshots/automated-tests.png)
+
+![Ручные API-проверки проходят](docs/screenshots/manual-api-output.png)
+
+![Benchmark parser engine](docs/screenshots/performance-benchmark.png)
+
+### Команды запуска
+
+```bash
+cd backend
+python scripts/benchmark_parser.py
+```
+
+После запуска создаются файлы:
+
+- `backend/reports/benchmark_results.csv`
+- `backend/reports/benchmark_report.md`
+- `docs/performance-report.md`
+
+### Итоги автоматических проверок
+
+| Проверка | Что запускается | Выход | Статус |
+| --- | --- | --- | --- |
+| Backend tests | unit, integration и performance smoke tests | `collected 43 items`, `43 passed in 2.35s` | Пройдено |
+| Frontend tests | Vitest component tests | `Test Files 3 passed`, `Tests 8 passed` | Пройдено |
+| Benchmark | 10 HTML-фикстур из `backend/app/tests/fixtures/performance/` | `Benchmark finished for 10 cases`, `OK: 10`, `ERROR: 0` | Пройдено |
+
+### Ручные проверки API
+
+Ручные сценарии запускались через API-слой приложения на тестовой SQLite-базе. Ошибочные входные данные считаются пройденными, если API возвращает ожидаемый код ошибки и понятное сообщение.
+
+| Сценарий | HTTP | Ключевой выход программы | Статус |
+| --- | ---: | --- | --- |
+| `GET /api/health` | 200 | `{"status":"ok","service":"recipe-html-parser"}` | Пройдено |
+| `POST /api/parse/html`, валидный рецепт | 200 | название: `Паста с томатами и базиликом`; ингредиенты: 5; шаги: 3; ошибки: 0; предупреждения: 0 | Пройдено |
+| `POST /api/parse/html`, поврежденный HTML | 200 | название: `Сломанный рецепт`; ошибки: 4; предупреждения: 6; первая ошибка: `MISMATCHED_NESTING` | Пройдено |
+| `POST /api/parse/html`, пустой HTML | 422 | `Invalid request data`, причина: `string_too_short` | Пройдено |
+| `POST /api/parse/url`, чужой домен | 400 | `Only https://eda.rambler.ru/recepty/... pages are allowed.` | Пройдено |
+| `GET /api/reports` после ручного парсинга | 200 | `reports_count: 2` | Пройдено |
+
+### Таблица benchmark
+
+| Файл | Размер HTML, KB | Время, ms | Память, KB | Токены | Ингредиенты | Шаги | Ошибки | Статус |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | --- |
+| `broken_html.html` | 0.85 | 72.34 | 368.63 | 42 | 7 | 3 | 7 | OK |
+| `incomplete_recipe.html` | 0.63 | 19.61 | 95.10 | 32 | 3 | 0 | 3 | OK |
+| `large_recipe.html` | 10.09 | 65.10 | 798.08 | 378 | 40 | 25 | 1 | OK |
+| `medium_recipe.html` | 4.30 | 24.24 | 307.19 | 134 | 12 | 9 | 0 | OK |
+| `multiple_recipes.html` | 2.71 | 20.61 | 139.61 | 74 | 4 | 3 | 0 | OK |
+| `noisy_html.html` | 3.56 | 36.76 | 331.48 | 173 | 6 | 4 | 0 | OK |
+| `recipe_without_image.html` | 1.63 | 30.42 | 120.69 | 49 | 5 | 3 | 1 | OK |
+| `recipe_without_ingredients.html` | 1.39 | 22.71 | 89.80 | 33 | 0 | 3 | 1 | OK |
+| `recipe_without_steps.html` | 1.19 | 29.41 | 100.53 | 39 | 5 | 0 | 1 | OK |
+| `small_recipe.html` | 1.64 | 14.18 | 107.93 | 44 | 3 | 3 | 0 | OK |
+
+С покрытием backend можно запустить отдельно:
 
 ```bash
 pytest --cov=app --cov-report=term-missing
@@ -202,7 +270,7 @@ pytest --cov=app --cov-report=term-missing
 
 ```bash
 cd frontend
-npm test
+npm.cmd test
 ```
 
 ## Итог

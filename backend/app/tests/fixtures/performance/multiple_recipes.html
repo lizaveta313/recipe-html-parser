@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Two Breakfast Recipes</title>
+  <meta name="description" content="A page with several recipe-like blocks.">
+  <link rel="canonical" href="https://eda.rambler.ru/recepty/test/two-breakfast-recipes">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Recipe",
+        "name": "First Breakfast Omelette",
+        "author": {"@type": "Person", "name": "Multi Recipe Cook"},
+        "recipeCategory": "Breakfast",
+        "recipeYield": "1 serving",
+        "totalTime": "PT12M",
+        "image": "https://eda.rambler.ru/images/recipe/omelette.jpg",
+        "description": "The first recipe on a page with several recipes.",
+        "recipeIngredient": ["2 eggs", "1 tbsp milk", "1 tsp butter", "1 pinch salt"],
+        "recipeInstructions": [
+          {"@type": "HowToStep", "text": "Beat eggs with milk and salt."},
+          {"@type": "HowToStep", "text": "Melt butter in a pan and pour in eggs."},
+          {"@type": "HowToStep", "text": "Cook the omelette until softly set."}
+        ]
+      },
+      {
+        "@type": "Recipe",
+        "name": "Second Berry Toast",
+        "author": {"@type": "Person", "name": "Multi Recipe Cook"},
+        "recipeCategory": "Breakfast",
+        "recipeYield": "1 serving",
+        "totalTime": "PT8M",
+        "image": "https://eda.rambler.ru/images/recipe/berry-toast.jpg",
+        "recipeIngredient": ["2 slices bread", "50 g cream cheese", "80 g berries"],
+        "recipeInstructions": [
+          {"@type": "HowToStep", "text": "Toast bread and spread cream cheese."},
+          {"@type": "HowToStep", "text": "Add berries on top and serve."}
+        ]
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <main>
+    <article class="recipe">
+      <h1>First Breakfast Omelette</h1>
+      <img src="/images/recipe/omelette.jpg" alt="Breakfast omelette">
+      <ul class="ingredients">
+        <li>2 eggs</li>
+        <li>1 tbsp milk</li>
+        <li>1 tsp butter</li>
+        <li>1 pinch salt</li>
+      </ul>
+      <ol class="instructions">
+        <li>Beat eggs with milk and salt.</li>
+        <li>Melt butter in a pan and pour in eggs.</li>
+        <li>Cook the omelette until softly set.</li>
+      </ol>
+    </article>
+    <article class="recipe related-recipe">
+      <h2>Second Berry Toast</h2>
+      <img src="/images/recipe/berry-toast.jpg" alt="Berry toast">
+      <ul class="ingredients">
+        <li>2 slices bread</li>
+        <li>50 g cream cheese</li>
+        <li>80 g berries</li>
+      </ul>
+      <ol class="instructions">
+        <li>Toast bread and spread cream cheese.</li>
+        <li>Add berries on top and serve.</li>
+      </ol>
+    </article>
+  </main>
+</body>
+</html>

@@ -44,11 +44,3 @@ pytest --cov=app --cov-report=term-missing
 cd frontend
 npm test
 ```
-
-E2E-тест Playwright оставлен как дополнительная проверка:
-
-```bash
-npm run test:e2e
-```
-
-Для основной сдачи достаточно backend-тестов и, если установлен Node.js, `npm test`.
