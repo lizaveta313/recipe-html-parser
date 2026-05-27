@@ -191,18 +191,6 @@ cd backend
 | Backend | `.venv\Scripts\python.exe -m pytest` | 43 теста | 43 passed |
 | Frontend | `npm.cmd test` | 8 тестов в 3 файлах | 8 passed |
 
-## Тестирование производительности
-
-Команды выполняются из активированного backend-окружения. В этом разделе зафиксирован не только запуск команд, но и то, что программа выводит: количество тестов, статусы, результаты ручных API-проверок и таблица benchmark.
-
-### Скриншоты результатов
-
-![Автоматические тесты проходят](docs/screenshots/automated-tests.png)
-
-![Ручные API-проверки проходят](docs/screenshots/manual-api-output.png)
-
-![Benchmark parser engine](docs/screenshots/performance-benchmark.png)
-
 ### Команды запуска
 
 ```bash
